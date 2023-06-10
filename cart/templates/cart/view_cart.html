@@ -1,0 +1,49 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'cart/styles.css' %}">
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carrello</title>
+    {% if request.user.is_authenticated %}
+        <meta name="user" content="{{ request.user.username }}">
+    {% endif %}
+</head>
+<body>
+    <h1>Carrello</h1>
+    <a class="back-link" href="{% url 'product_list' %}">Torna ai prodotti</a>
+
+    {% if cart.items.all %}
+    <table>
+        <tr>
+            <th>Prodotto</th>
+            <th>Prezzo</th>
+            <th>Quantità</th>
+            <th>Azioni</th>
+        </tr>
+        {% for item in cart.cartitem_set.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>€{{ item.product.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>
+                <form method="POST" action="{% url 'increase_quantity' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit">+</button>
+                </form>
+                <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit">-</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p class="totale">Totale: €{{ cart.total_price_field }}</p>
+    <a class="order-link" href="{% url 'place_order' %}">Effettua l'ordine</a>
+    {% else %}
+    <p class="empty">Il tuo carrello è vuoto.</p>
+    {% endif %}
+</body>
+</html>

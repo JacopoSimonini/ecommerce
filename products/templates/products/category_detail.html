@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dettagli Categoria</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'category.css' %}">
+</head>
+<body>
+        <h1>{{ category.name }}
+        <a class="view_all" href="{% url 'product_list' %}">Torna ai prodotti</a></h1>
+
+    <ul class="product-container">
+        {% for product in category.product_set.all %}
+                        <li>
+                            <div class="product-box">
+                                <div class="product-image">
+                                        <a id="prodotti_link" href="{% url 'product_detail' product.id %}"><img class="product-image" src="{{ product.image.url }}" alt="Product Image"> </a>
+
+
+                                </div>
+                                <h3>{{ product.name }}</h3>
+                                <p class="price">Prezzo: {{ product.price }} €</p>
+                                <a href="{% url 'product_detail' product.id %}">Dettagli</a>
+                            </div>
+                        </li>
+                {% empty %}
+                        <li>Nessun prodotto disponibile.</li>
+            </ul>
+        {% endfor %}
+    </div>
+</body>
+</html>
