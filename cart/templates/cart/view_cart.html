@@ -1,10 +1,9 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'cart/styles.css' %}">
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Carrello</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cart/styles.css' %}">
     {% if request.user.is_authenticated %}
         <meta name="user" content="{{ request.user.username }}">
     {% endif %}
