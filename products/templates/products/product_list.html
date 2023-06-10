@@ -5,6 +5,15 @@
     <title>Lista dei prodotti</title>
     <link rel="stylesheet" type="text/css" href="{% static 'product_styles.css' %}">
     <script src="https://kit.fontawesome.com/dd2ba3f426.js" crossorigin="anonymous"></script>
+    <script>
+function menuOnClick() {
+    document.getElementById("menu-bar").classList.toggle("change");
+    document.getElementById("nav").classList.toggle("change");
+    document.getElementById("menu-bg").classList.toggle("change-bg");
+    document.getElementById("blurr").classList.toggle("change-blurr");
+}
+</script>
+
     <style>
 body {
   background-color: #cfe8cf;
