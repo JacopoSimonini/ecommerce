@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product
 from cart.models import Cart
 from .models import Category
+from django.http import JsonResponse
+from django.urls import reverse
 
 def product_list(request):
     categories = Category.objects.all()
@@ -38,3 +40,14 @@ def view_cart(request):
         cart = None
     context = {'cart': cart}
     return render(request, 'cart/view_cart.html', context)
+
+
+def search_product(request):
+    search_term = request.GET.get('search')
+
+    try:
+        product = Product.objects.get(name__icontains=search_term)
+        product_detail_url = reverse('product_detail', args=[product.id])
+        return JsonResponse({'productDetailURL': product_detail_url})
+    except Product.DoesNotExist:
+        return JsonResponse({'productDetailURL': None})
