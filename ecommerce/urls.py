@@ -30,6 +30,7 @@ urlpatterns = [
     path('place_order/', order_views.place_order, name='place_order'),
     path('admin/', admin.site.urls),
     path('cart/increase_quantity/<int:item_id>/', cart_views.increase_quantity, name='increase_quantity'),
+    path('search-product/', views.search_product, name='search_product'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
