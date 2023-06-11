@@ -501,6 +501,55 @@ a.menu-li{
     height: 400vh;
     transform: translate(-60%, -30%);
 }
+        
+.input-container {
+  width: 220px;
+  position: relative;
+  left: 70%;
+  top: -80px;
+
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: calc(50% + 5px);
+  transform: translateY(calc(-50% - 5px));
+  cursor: pointer;
+}
+
+.input {
+  width: 100%;
+  height: 20px;
+  padding: 10px;
+  transition: .2s linear;
+  border: 2.5px solid black;
+  font-size: 14px;
+  letter-spacing: 2px;
+  border-radius: 8px;
+}
+
+.input:focus {
+ outline: none;
+ border-color: rgba(221,11,11,0.6);
+ background-color: #fff;
+ box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+}
+
+.input-container:hover > .icon {
+  animation: anim 1s linear infinite;
+}
+
+@keyframes anim {
+  0%,
+  100% {
+    transform: translateY(calc(-50% - 5px)) scale(1);
+  }
+
+  50% {
+    transform: translateY(calc(-50% - 5px)) scale(1.1);
+  }
+}
 
     </style>
 </head>
@@ -531,6 +580,12 @@ a.menu-li{
     {% else %}
     <a class="view_cart" style='font-size:20px' href="{% url 'login' %}">Log In <i id="icona_3" class='fas fa-home'></i></a>
     {% endif %}
+    <div class="input-container">
+        <input type="text" name="text" id="search-input" class="input" placeholder="search...">
+            <span class="icon" id="search-icon">
+                <svg width="19px" height="19px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="1" d="M14 5H20" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="1" d="M14 8H17" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="1" d="M22 22L20 20" stroke="#000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </span>
+    </div>
     <div class="categories-container">
         {% for category in categories %}
         <h2>{{ category.name }}</h2>
